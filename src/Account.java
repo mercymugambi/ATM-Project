@@ -8,10 +8,6 @@ public class Account {
 	 */
 	private String name; //savings, fixed etc.
 	
-	/**
-	 * The current balance of the account
-	 */
-	private double balance;
 	
 	/**
 	 * The account Id.
@@ -28,6 +24,33 @@ public class Account {
 	 * The list of Transactions for this Account
 	 */
 	private ArrayList<Transaction> transactions;
+	/**
+	 * Create  a new account
+	 * @param name		name of the account
+	 * @param holder	user object that holds this account
+	 * @param theBank	bank that issues the account
+	 */
 	
+	public Account(String name, User holder, Bank theBank) {
+		
+		//set the accoutn name and holder
+		this.name = name;
+		this.holder = holder;
+		
+		//get new account uuid
+		this.uuid = theBank.getNewAccountUUID();
+		
+		//init transactions
+		this.transactions = new ArrayList<Transaction>();
+		
+		//add account to holder and bank lists
+		holder.addAccount(this);
+		theBank.addAccount(this);
+		
+	}
+	
+	public String getUUID() {
+		return this.uuid;
+	}
 
 }
